@@ -47,7 +47,7 @@ Given two lists of integers representing the flower quantities in Lily's garden 
 
 **Output:**
 ```bash
-11
+1 1
 ```
 
 ### Explanation
