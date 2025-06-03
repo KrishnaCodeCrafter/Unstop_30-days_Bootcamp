@@ -69,6 +69,50 @@ Total number of squares = 6 + 1 = 7.
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+int count_square_sub_islands(const vector<vector<int>>& matrix) {
+    int n = matrix.size();
+    int m = matrix[0].size();
+
+    vector<vector<int>> dp(n,vector<int>(m,0));
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(i == 0 || j == 0){
+                dp[i][j] = matrix[i][j];
+            }else{
+                dp[i][j] = ((matrix[i][j])?matrix[i][j]+min({dp[i][j-1],dp[i-1][j],dp[i-1][j-1]}):0);
+            }
+        }
+    }
+    int total = 0;
+    for(auto &x:dp){
+        for(auto &y:x){
+            total += y;
+        }
+    }
+
+    return total;
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> matrix(n, vector<int>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    int result = count_square_sub_islands(matrix);
+    cout << result << endl;
+
+    return 0;
+}
 
 ```
 

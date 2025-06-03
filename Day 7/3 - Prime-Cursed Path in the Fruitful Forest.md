@@ -76,6 +76,58 @@ The tree with non-prime numbers of fruits are: 4, 6, 9, 8, 10, 12.
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+void zigzag_traversal(int m, int n, vector<vector<int>>& grid) {
+    vector<bool> isPrime(10001,true);
+    isPrime[0] = isPrime[1] = false;
+    for(int i=2;i*i <= 10000;i++){
+        if(isPrime[i]){
+            for(int j=i*i;j<=10000;j+=i){
+                isPrime[j] = false;
+            }
+        }
+    }       
+    bool val = true;
+    
+    int left =0,right = n-1;
+    
+    for(int i=0;i<m;i++){
+        if(i&1){
+            for(int j=right;j>=left;j--){
+                if(!isPrime[grid[i][j]]){
+                    val = false;
+                    cout<<grid[i][j]<<" ";
+                }
+            }
+        }else{
+            for(int j=left;j<=right;j++){
+                if(!isPrime[grid[i][j]]){
+                    val = false;
+                    cout<<grid[i][j]<<" ";
+                }
+            }
+        }
+    }
+
+    if(val)
+        cout<<-1<<endl;
+    
+}
+
+int main() {
+    int M, N;
+    cin >> M >> N;
+    vector<vector<int>> grid(M, vector<int>(N));
+    for (int i = 0; i < M; ++i) {
+        for (int j = 0; j < N; ++j) {
+            cin >> grid[i][j];
+        }
+    }
+    zigzag_traversal(M, N, grid);
+    return 0;
+}
 
 ```
 
