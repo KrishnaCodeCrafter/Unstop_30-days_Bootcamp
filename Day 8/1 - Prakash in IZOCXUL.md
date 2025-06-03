@@ -72,6 +72,39 @@ Substrgin of length 3 with unique characters are (abc), Count - 1
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+vector<int> count_substrings(const string& str, int k) {
+    vector<int> vec(k+1,0);
+    int n = str.size();
+    for(int i=0;i<n;i++){
+        unordered_set<char> st;
+        for(int j=0;j<k && i+j<n ; j++){
+            char ch = str[i+j];
+            if(st.find(ch) != st.end())
+                break;
+            st.insert(ch);
+            if(j+1 >= 2){
+                vec[j+1]++;
+            }
+        }
+    }
+
+    return vec;
+}
+
+int main() {
+    string S;
+    int K;
+    cin >> S;
+    cin >> K;
+    vector<int> result = count_substrings(S, K);
+    for (int i=2;i<=K;i++) {
+        cout << result[i] << endl;
+    }
+    return 0;
+}
 
 ```
 

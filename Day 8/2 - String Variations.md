@@ -57,6 +57,32 @@ Since the above string is not a palindrome, an ASCII value of A is printed, i.e.
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+int user_logic(const string& s) {
+    bool upper = isupper(s[0]);
+    int n = s.size();
+    for(int i=0;i<n/2;i++){
+        if(tolower(s[i]) != tolower(s[n-1-i])){
+            int val = upper ? toupper(s[0]) : tolower(s[0]);
+            return val;
+        }
+    }
+
+    return n;
+}
+
+int main() {
+    string s;
+    getline(cin, s);
+
+    // Call user logic function and print the output
+    int result = user_logic(s);
+    cout << result << endl;
+
+    return 0;
+}
 
 ```
 

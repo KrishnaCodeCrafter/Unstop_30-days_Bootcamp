@@ -87,6 +87,30 @@ c - a - t - c - h - f - o - u + r (remaining characters)
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+void decode_sequences(int n, const string& word1, int m, const string& word2) {
+    int i = 0,j = 0;
+    while(i<n && j<m){
+        cout<<word1[i++]<<word2[j++];
+    }
+    while(i<n){
+        cout<<word1[i++];
+    }
+    while(j<m){
+        cout<<word2[j++];
+    }
+
+}
+
+int main() {
+    int n, m;
+    string word1, word2;
+    cin >> n >> word1 >> m >> word2;
+    decode_sequences(n, word1, m, word2);
+    return 0;
+}
 
 ```
 

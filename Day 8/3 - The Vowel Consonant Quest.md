@@ -73,6 +73,63 @@ Consonants: B, N, S, T, P, P, B, L, S (9 consonants)
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+bool isVowel(char ch){
+    string str = "aeiouAEIOU";
+    if(str.find(ch) == string::npos){
+        return false;
+    }
+    return true;
+}
+
+bool isPrime(int n){
+    for(int i=2;i<=sqrt(n);i++){
+        if(n%i == 0)
+            return false;
+    }
+    return true;
+}
+
+
+bool check(int n){
+    if(n == 0)
+        return false;
+    int root = sqrt(n);
+    if(root*root != n)
+        return false;
+    return isPrime(root);    
+}
+
+bool check_qualification(const string &word) {
+    int n = word.size();
+    int vowelCount = 0;
+    for(auto &x:word){
+        if(isVowel(x)){
+            vowelCount++;
+        }
+    }
+    if(vowelCount < 2){
+        return false;
+    }
+    int consonentCount = n-vowelCount;
+    return check(consonentCount);
+}
+
+int main() {
+    string word;
+    getline(cin, word);
+    
+    bool res = check_qualification(word);
+    if(res){
+        cout<<"Qualify"<<endl;
+    }else{
+        cout<<"Disqualify"<<endl;
+    }
+    return 0;
+}
+
 
 ```
 
