@@ -84,6 +84,29 @@ Decoded message: "beunstoppable".
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+void decode_message(const string& encoded) {
+    for(auto &x:encoded){
+        if('a' <= x && x <= 'n'){
+            int diff = x - 'a';
+            cout<<(char)('n'-diff);
+        }else if('o' <= x && x <= 'z'){
+            int diff = x - 'o';
+            cout<<(char)('z'-diff);
+        }
+    }
+}
+
+int main() {
+    string encoded;
+    getline(cin, encoded);
+    
+    // Call user logic function and print the output
+    decode_message(encoded);
+    return 0;
+}
 
 ```
 

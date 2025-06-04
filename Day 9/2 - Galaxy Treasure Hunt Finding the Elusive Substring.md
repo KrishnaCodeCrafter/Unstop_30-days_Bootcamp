@@ -63,6 +63,49 @@ There is no substring of S that contains all the characters of T.
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+int shortest_substring(const string& s, const string& t) {
+    int n = s.size();
+    int left=0;
+    int minLen = INT_MAX;
+    int right = 0;
+    vector<int> freq(128,0);
+    for(auto &x:t){
+        freq[x]++;
+    }
+    int cnt = t.size();
+    while(right < n){
+        char r_ch = s[right];
+        if(freq[r_ch] > 0){
+            cnt--;
+        }
+        freq[r_ch]--;
+        while(cnt == 0){
+            minLen = min(minLen,right-left+1);
+            char l_ch = s[left];
+            freq[l_ch]++;
+            if(freq[l_ch] > 0){
+                cnt++;
+            }
+            left++;
+        }
+        right++;
+    }
+    if(minLen != INT_MAX)
+        return minLen;
+    return -1;
+}
+
+int main() {
+    string s, t;
+    cin >> s >> t;
+    int result = shortest_substring(s, t);
+    cout << result << endl;
+    return 0;
+}
+
 
 ```
 

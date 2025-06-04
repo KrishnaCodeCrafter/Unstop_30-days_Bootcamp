@@ -76,6 +76,40 @@ Day 2: Bob reverses "jabgi", which becomes "igbaj", and appends S again, forming
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+bool check(string& a,string& b){
+    if(b.size() > a.size())
+        return false;
+    int j = 0;
+    for(int i=0;i<a.size() && j<b.size();i++){
+        if(a[i] == b[j])    
+            j++;
+    }
+    return j == b.size();
+}
+
+int find_smallest_day(string S, string T) {
+    string temp = S;
+    int d = 1;
+    while(true){
+        if(check(temp,T))
+            return d;
+        reverse(temp.begin(),temp.end());
+        temp += S;
+        d++;
+    }
+    return -1;
+}
+
+int main() {
+    string S, T;
+    cin >> S >> T;
+    int result = find_smallest_day(S, T);
+    cout << result << endl;
+    return 0;
+}
 
 ```
 

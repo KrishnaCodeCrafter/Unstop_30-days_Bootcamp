@@ -76,6 +76,58 @@ The string mmoppqrr has odd-frequency characters: o: 1 and q: 1. Since there are
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+bool comp(pair<int,char>& p1,pair<int,char> &p2){
+    if(p1.first > p2.first) return true;
+    if(p1.first == p2.first)    return p1.second < p2.second;
+    return false;
+}
+
+bool comp2(pair<int,char>& p1,pair<int,char> &p2){
+    if(p1.first < p2.first) return true;
+    if(p1.first == p2.first)    return p1.second < p2.second;
+    return false;
+}
+
+void user_logic(const string& s) {
+    unordered_map<char,int> umap;
+    for(int i=0;i<s.size();i++){
+        umap[s[i]]++;
+    }    
+
+    vector<pair<int,char>> vec;
+    for(auto &x:umap){
+        if(x.second&1)
+            vec.push_back({x.second,x.first});
+    }
+    if(vec.size() == 0){
+        cout<<-1<<endl;
+        return ;
+    }
+    if(vec.size() < 3){
+        sort(vec.begin(),vec.end(),comp2);
+        cout<<vec[0].second<<" "<<vec[0].first<<endl;
+    }else{
+        sort(vec.begin(),vec.end(),comp);
+        long long pro = 1;
+        for(int i=0;i<3;i++){
+            cout<<vec[i].second<<" "<<vec[i].first<<endl;
+            pro *= vec[i].first;
+        }
+        cout<<pro;
+    }
+}
+
+int main() {
+    string s;
+    getline(cin, s);
+    
+    user_logic(s);
+    
+    return 0;
+}
 
 ```
 
