@@ -66,6 +66,24 @@ First wrong decision, i.e. 'W' is present at index 0. So, the output is 0
 
 ```cpp
 
+#include <bits/stdc++.h>
+using namespace std;
+
+int FirstWrongDecision(string s) {
+    for(int i=0;i<s.size();i++){
+        if(s[i] == 'W')
+            return i;
+    }
+    return -1;
+}
+
+int main() {
+    string str;
+    cin >> str;
+    // Call the function FirstWrongDecision().
+    cout << FirstWrongDecision(str) << endl;
+    return 0;
+}
 
 ```
 

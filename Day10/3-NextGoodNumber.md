@@ -66,6 +66,38 @@ You are given a number x you need to tell the next largest number which is great
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+void next_good_number(int x) {
+    x++;
+    string s = to_string(x);
+    for(int i=0;i<s.size();i++){
+        int num = s[i]-'0';
+        if(!(num&1)){
+            s[i]+=1;
+            for(int j=i+1;j<s.size();j++){
+                s[j] = '1';
+            }
+            break;
+        }
+    }
+    cout<<s<<endl;
+}
+
+int main() {
+    int T;
+    cin >> T;
+    vector<int> results(T);
+
+    for (int i = 0; i < T; ++i) {
+        int x;
+        cin >> x;
+        next_good_number(x);
+    }
+
+    return 0;
+}
 
 ```
 

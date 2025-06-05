@@ -91,6 +91,44 @@ The second query asks for the position of the student with height 7. Since 7 is 
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+void find_student_positions(int n, vector<int>& heights, int k, vector<int>& queries, vector<int>& results) {
+    for(int i=0;i<queries.size();i++){
+        int x = queries[i];
+        int low = 0;
+        int high = n-1;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(heights[mid] >= x){
+                high = mid-1;
+            }else
+                low = mid+1;
+        }
+        results[i] = low;
+    }
+}
+
+int main() {
+    int n, k;
+    cin >> n;
+    vector<int> heights(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> heights[i];
+    }
+    cin >> k;
+    vector<int> queries(k);
+    for (int i = 0; i < k; ++i) {
+        cin >> queries[i];
+    }
+    vector<int> results(k);
+    find_student_positions(n, heights, k, queries, results);
+    for (int i = 0; i < k; ++i) {
+        cout << results[i] << endl;
+    }
+    return 0;
+}
 
 ```
 
