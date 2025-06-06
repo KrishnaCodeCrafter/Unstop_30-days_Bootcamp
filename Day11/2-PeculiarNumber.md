@@ -76,6 +76,75 @@ Since 12 is less than 100, the 12th Fibonacci number 144 is returned as the pecu
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+int fib(int num){
+    int a = 0;
+    int b = 1;
+    for(int i=0;i<num;i++){
+        int c = a+b;
+        a = b;
+        b = c;
+    }
+    return a;
+}
+
+bool canPartition(vector<int>& arr,int k,int mx){
+    int part = 1;
+    int n = arr.size();
+    int sum = 0;
+    for(int i=0;i<n;i++){
+        if(sum + arr[i] > mx){
+            part++;
+            sum=arr[i];
+            if(part > k)
+                return false;
+        }else{
+            sum += arr[i];
+        }
+    }
+    return true;
+}
+
+int peculiarNumber(int n, int k, vector<int>& arr) {
+    for(int i=0;i<n;i++){
+        arr[i] = abs(i-arr[i]);
+    }
+
+    int low = *max_element(arr.begin(),arr.end());
+    int high = accumulate(arr.begin(),arr.end(),0);
+    int result = high;
+
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        if(canPartition(arr,k,mid)){
+            result = mid;
+            high = mid-1;
+        }else{
+            low = mid+1;
+        }
+    }
+    if(result<100)
+        return fib(result);
+    return result;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    
+    vector<int> arr(n);
+    for(int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    // Call user logic function and print the output
+    int result = peculiarNumber(n, k, arr);
+    cout << result << endl;
+
+    return 0;
+}
 
 ```
 

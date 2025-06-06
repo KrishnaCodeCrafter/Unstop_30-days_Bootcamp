@@ -113,6 +113,44 @@ The highest interest value is 16.
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+int solve(vector<int>& a,vector<int>& b){
+    int n = a.size();
+    int cnt = 0;
+    for(int i=0;i<n;i++){
+        int num = a[i];
+        cnt += (upper_bound(b.begin(),b.end(),num) - b.begin());
+    }
+    return cnt;
+}
+
+int user_logic(int n, vector<int>& a, vector<int>& b) {
+    sort(a.begin(),a.end());
+    sort(b.begin(),b.end());
+    
+    int cnt1 = solve(a,b);
+    int cnt2 = solve(b,a);
+
+    return max(cnt1,cnt2);
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> arr(n), b(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> b[i];
+    }
+    int result = user_logic(n, arr, b);
+    cout << result << endl;
+    return 0;
+}
+
 
 ```
 
