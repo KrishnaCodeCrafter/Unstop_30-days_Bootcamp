@@ -68,6 +68,34 @@ Here are two sentences:
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+int user_logic(string s) {
+    int ans = 0;
+    int cnt = 1;
+    for(int i=0;i<s.size();i++){
+        if(s[i] == ' '){
+            cnt++;
+        }else if(s[i] == '.' || s[i] == ','){
+            ans = max(ans,cnt);
+            i++;
+            cnt = 1;
+        }
+    }
+
+    return ans;
+}
+
+int main() {
+    string s;
+    getline(cin, s);
+    
+    // Call user logic function and print the output
+    int result = user_logic(s);
+    cout << result << endl;
+    return 0;
+}
 
 ```
 

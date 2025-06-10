@@ -63,6 +63,22 @@ It's impossible to achieve scores of 1, 1, and 1 for all three participants. Giv
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+
+int main() {
+    int a,b,c;
+    cin>>a>>b>>c;
+
+    if((a+b+c)%2)
+        cout<<"-1\n";
+    else{
+        cout<<((a+b+c) - max(0,(c-b-a))) /2<<"\n";
+    }
+
+    return 0;
+}
 
 ```
 

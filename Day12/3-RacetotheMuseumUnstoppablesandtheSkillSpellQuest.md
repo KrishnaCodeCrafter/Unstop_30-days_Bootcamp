@@ -87,6 +87,59 @@ Minimum time is the maximum of these times: ( max(9, 5, 3) = 9 )
 
 ```cpp
 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+bool check(int n, int m, int p, vector<int>& unstoppables, vector<int>& spells,int mid){
+    int j=0;
+    for(int i=0;i<n;i++){
+        if(abs(unstoppables[i] - spells[j]) + abs(spells[j] - p) > mid)
+            return false;
+        j++;
+    }
+    return true;
+}
+
+int min_delivery_time(int n, int m, int p, vector<int>& unstoppables, vector<int>& spells) {
+    int low = 0;
+    int res = -1;
+    int high = 1e9;
+
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        if(check(n,m,p,unstoppables,spells,mid)){
+            res = mid;
+            high = mid-1;
+        }else
+            low = mid+1;
+    }
+
+    return res;  // Placeholder return statement
+}
+
+int main() {
+    int n, m, p;
+    cin >> n >> m >> p;
+    
+    vector<int> unstoppables(n);
+    for(int i = 0; i < n; ++i) {
+        cin >> unstoppables[i];
+    }
+
+    vector<int> spells(m);
+    for(int i = 0; i < m; ++i) {
+        cin >> spells[i];
+    }
+    
+    int result = min_delivery_time(n, m, p, unstoppables, spells);
+    cout << result << endl;
+
+    return 0;
+}
+
 
 ```
 

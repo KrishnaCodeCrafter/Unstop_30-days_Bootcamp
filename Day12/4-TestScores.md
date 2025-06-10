@@ -81,6 +81,53 @@ Therefore, the output is 2.
 
 ```cpp
 
+#include "bits/stdc++.h"
+using namespace std;
+
+int solve(vector<int>& scores,int x){
+    int low = 0;
+    int high = scores.size()-1;
+    int ans = -1;
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        if(x <= scores[mid]){
+            ans = mid;
+            low = mid+1;
+        }else{
+            high = mid-1;
+        }
+    }
+    return ans+1;
+}
+
+vector<int> user_logic(int n, int q, vector<int>& scores, vector<int>& queries) {
+    vector<int> results;    
+    sort(scores.rbegin(),scores.rend());
+
+    for(auto& x:queries){
+        results.push_back(solve(scores,x));
+    }
+
+    return results;
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+    vector<int> scores(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> scores[i];
+    }
+    vector<int> queries(q);
+    for (int i = 0; i < q; ++i) {
+        cin >> queries[i];
+    }
+    vector<int> results = user_logic(n, q, scores, queries);
+    for (int result : results) {
+        cout << result << endl;
+    }
+    return 0;
+}
 
 ```
 
